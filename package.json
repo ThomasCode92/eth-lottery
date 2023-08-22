@@ -1,0 +1,16 @@
+{
+  "name": "eth-lottery",
+  "description": "Lottery built on the Ethereum Blockchain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o ./dist contracts/*.sol"
+  },
+  "dependencies": {
+    "solc": "^0.8.21"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.2",
+    "prettier-plugin-solidity": "^1.1.3"
+  }
+}

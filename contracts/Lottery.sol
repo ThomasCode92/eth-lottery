@@ -14,4 +14,14 @@ contract Lottery {
 
         players.push(msg.sender);
     }
+
+    function pickWinner() public {}
+
+    function random() private view returns (uint) {
+        bytes32 hash = keccak256(
+            abi.encodePacked(block.difficulty, block.timestamp, players)
+        );
+
+        return uint(hash);
+    }
 }

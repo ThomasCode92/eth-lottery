@@ -15,7 +15,9 @@ contract Lottery {
         players.push(msg.sender);
     }
 
-    function pickWinner() public {}
+    function pickWinner() public {
+        uint randomIdx = random() % players.length;
+    }
 
     function random() private view returns (uint) {
         bytes32 hash = keccak256(

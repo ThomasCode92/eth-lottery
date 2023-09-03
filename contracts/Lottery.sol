@@ -17,6 +17,9 @@ contract Lottery {
 
     function pickWinner() public {
         uint randomIdx = random() % players.length;
+        address payable winner = payable(players[randomIdx]);
+
+        winner.transfer(address(this).balance);
     }
 
     function random() private view returns (uint) {

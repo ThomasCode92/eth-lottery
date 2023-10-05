@@ -20,6 +20,8 @@ contract Lottery {
         address payable winner = payable(players[randomIdx]);
 
         winner.transfer(address(this).balance);
+
+        players = new address[](0);
     }
 
     function random() private view returns (uint) {

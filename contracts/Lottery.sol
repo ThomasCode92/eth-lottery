@@ -15,9 +15,7 @@ contract Lottery {
         players.push(msg.sender);
     }
 
-    function pickWinner() public {
-        require(msg.sender == manager);
-
+    function pickWinner() public restricted {
         uint randomIdx = random() % players.length;
         address payable winner = payable(players[randomIdx]);
 
@@ -32,5 +30,10 @@ contract Lottery {
         );
 
         return uint(hash);
+    }
+
+    modifier restricted() {
+        require(msg.sender == manager);
+        _;
     }
 }

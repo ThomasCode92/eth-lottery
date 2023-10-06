@@ -18,3 +18,9 @@ beforeEach(async () => {
     .deploy({ data: evm.bytecode.object })
     .send({ from: accounts[0], gas: '1000000' });
 });
+
+describe('Lottery Contract', () => {
+  test('should deploy a contract', () => {
+    expect(lottery.options.address).toBeDefined();
+  });
+});

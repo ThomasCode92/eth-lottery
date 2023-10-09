@@ -37,4 +37,23 @@ describe('Lottery Contract', () => {
     expect(players.length).toBe(1);
     expect(players[0]).toBe(accounts[0]);
   });
+
+  test('should allow multiple accounts to enter', async () => {
+    for (let i = 0; i < 3; i++) {
+      await lottery.methods.enter().send({
+        from: accounts[i],
+        value: web3.utils.toWei('0.02', 'ether'),
+      });
+    }
+
+    const players = await lottery.methods
+      .getPlayers()
+      .call({ from: accounts[0] });
+
+    expect(players.length).toBe(3);
+
+    for (let i = 0; i < 3; i++) {
+      expect(players[i]).toBe(accounts[i]);
+    }
+  });
 });

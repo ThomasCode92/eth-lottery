@@ -75,4 +75,30 @@ describe('Lottery Contract', () => {
       expect(error).toBeDefined();
     }
   });
+
+  test('should send money to the winner and reset the player array', async () => {
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei('2', 'ether'),
+    });
+
+    const initialBalance = await web3.eth.getBalance(accounts[0]);
+
+    await lottery.methods.pickWinner().send({ from: accounts[0] });
+
+    const finalBalance = await web3.eth.getBalance(accounts[0]);
+    const difference = finalBalance - initialBalance;
+
+    const players = await lottery.methods
+      .getPlayers()
+      .call({ from: accounts[0] });
+
+    const lotteryBalance = await web3.eth.getBalance(lottery.options.address);
+
+    expect(players.length).toBe(0);
+    expect(Number(lotteryBalance)).toBe(0);
+    expect(Number(difference)).toBeGreaterThan(
+      Number(web3.utils.toWei('1.8', 'ether')),
+    );
+  });
 });

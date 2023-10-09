@@ -56,4 +56,15 @@ describe('Lottery Contract', () => {
       expect(players[i]).toBe(accounts[i]);
     }
   });
+
+  test('should require a minimum amount of ether to enter', async () => {
+    try {
+      await lottery.methods.enter().send({
+        from: accounts[0],
+        value: 200,
+      });
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
 });

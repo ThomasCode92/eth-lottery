@@ -67,4 +67,12 @@ describe('Lottery Contract', () => {
       expect(error).toBeDefined();
     }
   });
+
+  test('should allow only the manager to pick a winner', async () => {
+    try {
+      await lottery.methods.pickWinner().send({ from: accounts[1] });
+    } catch (error) {
+      expect(error).toBeDefined();
+    }
+  });
 });

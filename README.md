@@ -1,6 +1,6 @@
 # EthLottery
 
-Welcome to _EthLottery_, a decentralized lottery application built on the Ethereum blockchain using [ethers.js](https://docs.ethers.org/) for the backend and [React](https://react.dev/) for the frontend.
+Welcome to _EthLottery_, a decentralized lottery application built on the Ethereum blockchain using [Web3.js](https://web3js.org/) for the backend and [React](https://react.dev/) for the frontend.
 
 **About this Repository**<br />
 This project is part of the _[Ethereum and Solidity: The Complete Developer's Guide](https://www.udemy.com/course/ethereum-and-solidity-the-complete-developers-guide/)_ course from [Stephen Grider](https://www.udemy.com/user/sgslo/).<br />

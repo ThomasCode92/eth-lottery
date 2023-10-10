@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "compile": "yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o ./dist contracts/*.sol",
-    "test": "jest  ./test"
+    "test": "jest ./test"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^2.1.15",

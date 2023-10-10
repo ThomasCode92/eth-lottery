@@ -3,6 +3,7 @@
   "gitlens.codeLens.recentChange.enabled": false,
   "gitlens.codeLens.authors.enabled": false,
   "jest.jestCommandLine": "npm run test --",
+  "jest.rootPath": "./backend",
   "jest.autoRun": {
     "watch": false,
     "onSave": "test-src-file",

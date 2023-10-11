@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect, useState } from 'react';
 
 import web3 from './utils/web3';
 import lottery from './utils/lottery';
@@ -6,18 +6,34 @@ import lottery from './utils/lottery';
 import './App.css';
 
 function App() {
+  const [manager, setManager] = useState('');
+
   useEffect(() => {
-    const listAccounts = async () => {
-      return await web3.eth.getAccounts();
+    const fetchManager = async () => {
+      try {
+        const managerAddress = await lottery.methods.manager().call();
+        setManager(managerAddress);
+      } catch (error) {
+        console.error('Error fetching manager:', error);
+      }
     };
 
-    listAccounts().then(accounts => {
-      console.log('Account', accounts[0]);
-      console.log('Lottery', lottery);
-    });
+    fetchManager();
   }, []);
 
-  return <div></div>;
+  return (
+    <Fragment>
+      <header>
+        <h1>Eth Lottery</h1>
+      </header>
+      <main>
+        <section>
+          <h2>Lottery Contract</h2>
+          <p>This contract is managed by {manager}</p>
+        </section>
+      </main>
+    </Fragment>
+  );
 }
 
 export default App;

@@ -1,7 +1,9 @@
+import { useEffect } from 'react';
+
 import web3 from './utils/web3';
+import lottery from './utils/lottery';
 
 import './App.css';
-import { useEffect } from 'react';
 
 function App() {
   useEffect(() => {
@@ -9,7 +11,10 @@ function App() {
       return await web3.eth.getAccounts();
     };
 
-    listAccounts().then(console.log);
+    listAccounts().then(accounts => {
+      console.log('Account', accounts[0]);
+      console.log('Lottery', lottery);
+    });
   }, []);
 
   return <div></div>;

@@ -32,6 +32,19 @@ function App() {
     fetchData();
   }, []);
 
+  const submitHandler = async event => {
+    event.preventDefault();
+
+    const accounts = await web3.eth.getAccounts();
+
+    await lottery.methods.enter().send({
+      from: accounts[0],
+      value: web3.utils.toWei(value, 'ether'),
+    });
+
+    setValue('');
+  };
+
   return (
     <Fragment>
       <header>
@@ -49,7 +62,7 @@ function App() {
         <hr />
         <section>
           <h2>Want to try your luck?</h2>
-          <form>
+          <form onSubmit={submitHandler}>
             <div>
               <label htmlFor="ethAmount">Amount of ether to enter</label>
               <input

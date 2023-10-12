@@ -9,6 +9,7 @@ function App() {
   const [manager, setManager] = useState('');
   const [players, setPlayers] = useState([]);
   const [balance, setBalance] = useState('');
+  const [value, setValue] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +45,22 @@ function App() {
             There are currently {players.length} people entered, competing to
             win {web3.utils.fromWei(balance, 'ether')} ether!
           </p>
+        </section>
+        <hr />
+        <section>
+          <h2>Want to try your luck?</h2>
+          <form>
+            <div>
+              <label htmlFor="ethAmount">Amount of ether to enter</label>
+              <input
+                id="ethAmount"
+                type="number"
+                value={value}
+                onChange={event => setValue(event.target.value)}
+              />
+            </div>
+            <button>Enter</button>
+          </form>
         </section>
       </main>
     </Fragment>

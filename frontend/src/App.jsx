@@ -10,7 +10,8 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [balance, setBalance] = useState('');
   const [value, setValue] = useState('');
-  const [message, setMessage] = useState('');
+  const [enterMessage, setEnterMessage] = useState('');
+  const [winnerMessage, setWinnerMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +39,7 @@ function App() {
 
     const accounts = await web3.eth.getAccounts();
 
-    setMessage('Waiting on transaction success...');
+    setEnterMessage('Waiting on transaction success...');
 
     await lottery.methods.enter().send({
       from: accounts[0],
@@ -47,7 +48,20 @@ function App() {
     });
 
     setValue('');
-    setMessage('You have been entered!');
+    setEnterMessage('You have been entered!');
+  };
+
+  const pickWinnerHandler = async () => {
+    const accounts = await web3.eth.getAccounts();
+
+    setWinnerMessage('Waiting on transaction success...');
+
+    await lottery.methods.pickWinner().send({
+      from: accounts[0],
+      data: lottery.methods.pickWinner().encodeABI(),
+    });
+
+    setWinnerMessage('A winner has been picked!');
   };
 
   return (
@@ -79,7 +93,13 @@ function App() {
             </div>
             <button>Enter</button>
           </form>
-          {message}
+          <p>{enterMessage}</p>
+        </section>
+        <hr />
+        <section>
+          <h2>Ready to pick a winner</h2>
+          <button onClick={pickWinnerHandler}>Pick a winner</button>
+          <p>{winnerMessage}</p>
         </section>
       </main>
     </Fragment>

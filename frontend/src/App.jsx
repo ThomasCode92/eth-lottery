@@ -10,6 +10,7 @@ function App() {
   const [players, setPlayers] = useState([]);
   const [balance, setBalance] = useState('');
   const [value, setValue] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,12 +38,16 @@ function App() {
 
     const accounts = await web3.eth.getAccounts();
 
+    setMessage('Waiting on transaction success...');
+
     await lottery.methods.enter().send({
       from: accounts[0],
       value: web3.utils.toWei(value, 'ether'),
+      data: lottery.methods.enter().encodeABI(),
     });
 
     setValue('');
+    setMessage('You have been entered!');
   };
 
   return (
@@ -74,6 +79,7 @@ function App() {
             </div>
             <button>Enter</button>
           </form>
+          {message}
         </section>
       </main>
     </Fragment>
